@@ -106,12 +106,15 @@ void second()
 
 void third()
 {
-    string text = "Some text lol domestoso, !! stark.";
+    string filename = "D:\\CHsarp\\Csharp_Lab8\\Third_In.txt";
+    string text = File.ReadAllText(filename);
     string editedText = EditText(text);
-    Console.WriteLine(editedText);
+    Console.WriteLine("OK");
+    File.WriteAllText ("D:\\CHsarp\\Csharp_Lab8\\Third_Out.txt", editedText);
 }
 static string EditText(string text)
 {
+    
 
     string[] words = Regex.Split(text, @"(\s+|\W+)");
 
