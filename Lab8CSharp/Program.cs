@@ -1,5 +1,4 @@
-﻿using System.Runtime.ExceptionServices;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 void ReplaceOrRemoveEmail(string filePath, string oldEmail="", string newEmail = "")
 {
@@ -105,8 +104,33 @@ void second()
     Console.WriteLine("ОК.");
 }
 
+void third()
+{
+    string text = "Some text lol domestoso, !! stark.";
+    string editedText = EditText(text);
+    Console.WriteLine(editedText);
+}
+static string EditText(string text)
+{
+
+    string[] words = Regex.Split(text, @"(\s+|\W+)");
 
 
+    for (int i = 0; i < words.Length; i++)
+    {
+   
+        if (words[i].Length % 2 != 0)
+        {
+     
+            int middleIndex = words[i].Length / 2;
+            words[i] = words[i].Remove(middleIndex, 1);
+        }
+    }
+
+    
+    string editedText = string.Join(" ", words);
+    return editedText;
+}
 
 void main()
 {
@@ -116,6 +140,7 @@ void main()
     {
         case 1: first(); break;
         case 2: second(); break;
+        case 3: third(); break;
     }
 }
 main();
