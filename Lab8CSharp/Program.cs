@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using Lab8CSharp.Fourth;
+using System.Text.RegularExpressions;
 
 void ReplaceOrRemoveEmail(string filePath, string oldEmail="", string newEmail = "")
 {
@@ -135,6 +136,64 @@ static string EditText(string text)
     return editedText;
 }
 
+void fourth()
+{
+    Fourth fourth = new Fourth();
+    fourth.fourth();
+}
+
+static void fifth()
+{
+    string studentLastName = "Krutov";
+    string directory1 = $@"D:\temp\{studentLastName}1";
+    string directory2 = $@"D:\temp\{studentLastName}2";
+    string file1Path = Path.Combine(directory1, "t1.txt");
+    string file2Path = Path.Combine(directory1, "t2.txt");
+    string file3Path = Path.Combine(directory2, "t3.txt");
+
+
+    Directory.CreateDirectory(directory1);
+    Directory.CreateDirectory(directory2);
+
+
+    string text1 = "<Шевченко Степан Іванович, 2001> року народження, місце проживання <м. Суми>";
+    string text2 = "<Комар Сергій Федорович, 2000> року народження, місце проживання <м. Київ>";
+    File.WriteAllText(file1Path, text1);
+    File.WriteAllText(file2Path, text2);
+
+
+    using (StreamWriter writer = new StreamWriter(file3Path))
+    {
+        writer.WriteLine(File.ReadAllText(file1Path));
+        writer.WriteLine(File.ReadAllText(file2Path));
+    }
+
+ 
+    Console.WriteLine($"Створені файли:");
+    Console.WriteLine($"Файл {file1Path}: {File.ReadAllText(file1Path)}");
+    Console.WriteLine($"Файл {file2Path}: {File.ReadAllText(file2Path)}");
+    Console.WriteLine($"Файл {file3Path}: {File.ReadAllText(file3Path)}");
+
+
+    File.Move(file2Path, Path.Combine(directory2, "t2.txt"));
+
+    File.Copy(file1Path, Path.Combine(directory2, "t1.txt"), true);
+
+
+    Directory.Move(directory2, @"D:\temp\ALL");
+    Directory.Delete(directory1, true); 
+
+
+    string[] allFiles = Directory.GetFiles(@"D:\temp\ALL");
+    Console.WriteLine("\nПовна інформація про файли папки ALL:");
+    foreach (string file in allFiles)
+    {
+        Console.WriteLine($"Файл: {file}, Розмір: {new FileInfo(file).Length} байт");
+    }
+
+
+}
+
 void main()
 {
     Console.Write("Enter your choice: ");
@@ -144,6 +203,8 @@ void main()
         case 1: first(); break;
         case 2: second(); break;
         case 3: third(); break;
+        case 4: fourth(); break;
+        case 5: fifth(); break;
     }
 }
 main();
